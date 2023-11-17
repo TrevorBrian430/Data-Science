@@ -1,0 +1,22 @@
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.metrics import accuracy_score, classification_report
+import numpy as np
+
+lee = 100
+e = 10 
+
+X = np.random.rand(lee, 10)
+y = np.random.randint(0, e, 100)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = GradientBoostingClassifier(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+
+predictions = model.predict(X_test)
+
+accuracy = accuracy_score(y_test, predictions)
+print(f"Accuracy: {accuracy}")
+
+print(classification_report(y_test, predictions))
